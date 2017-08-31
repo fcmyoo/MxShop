@@ -16,15 +16,17 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.views.static import serve
 from rest_framework.documentation import include_docs_urls
+from rest_framework.routers import DefaultRouter
 
 import xadmin
 from MxShop.settings import MEDIA_ROOT
-from goods.views import GoodsListViewSet
-from rest_framework.routers import DefaultRouter
+from goods.views import GoodsListViewSet, CategoryViewSet
+
 # from django.contrib import admin
 
 route=DefaultRouter()
 route.register(r'goods',GoodsListViewSet)
+route.register(r'categorys', CategoryViewSet)
 
 # goods_list = GoodsListViewSet.as_view({
 #     'get': 'list',
