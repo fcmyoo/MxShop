@@ -10,9 +10,10 @@ class YunPian(object):
         parmas={
             'apikey':self.api_key,
             'mobile':mobile,
-            'text':'【开发测试】您的验证码是{code}。如非本人操作，请忽略本短信'.format(code)
+            'text':'【徒行陌客】您的验证码是{code}。如非本人操作，请忽略本短信'.format(code=code)
 
         }
         response=requests.post(self.single_send_url,data=parmas)
         import json
         re_dict=json.loads(response.text)
+        return re_dict

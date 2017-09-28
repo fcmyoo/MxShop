@@ -1,7 +1,6 @@
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
 from rest_framework import viewsets, mixins
-from rest_framework.authentication import TokenAuthentication
 from rest_framework.pagination import PageNumberPagination
 
 from goods.models import Goods, GoodsCategory
@@ -16,7 +15,7 @@ class GoodsSetPagination(PageNumberPagination):
     max_page_size = 100
 
 
-class GoodsListViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
+class GoodsListViewSet(mixins.ListModelMixin, viewsets.GenericViewSet, mixins.RetrieveModelMixin):
     """
     商品列表页,分页,搜索,过滤,排序
     """
@@ -35,5 +34,5 @@ class CategoryViewSet(mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets
     """
     list:商品分类列表数据
     """
-    queryset = GoodsCategory.objects.filter(category_type=1)
+    queryset = GoodsCategory.objects.filter(category_type__in=(1, 2))  # 只去除一级及二级分类,不取三级分类,方便list-nav使用
     serializer_class = CategorySerializer
