@@ -10,7 +10,7 @@ from rest_framework_jwt.serializers import jwt_payload_handler, jwt_encode_handl
 from MxShop.settings import APIKEY
 from utils.yunpian import YunPian
 from .models import VerifyCode
-from .serializers import SmsSerializer, UserRegSerializer,UserDetailSerializer
+from .serializers import SmsSerializer, UserRegSerializer, UserDetailSerializer
 
 User = get_user_model()
 
@@ -66,7 +66,7 @@ class SmsCodeViewset(mixins.CreateModelMixin, viewsets.GenericViewSet):
             }, status=status.HTTP_201_CREATED)
 
 
-class UserViewSet(mixins.CreateModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
+class UserViewSet(mixins.CreateModelMixin, mixins.UpdateModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     """
     用户
     """

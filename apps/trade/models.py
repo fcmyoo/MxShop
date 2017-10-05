@@ -1,10 +1,13 @@
 from datetime import datetime
 
-from django.db import models
 from django.contrib.auth import get_user_model
+from django.db import models
 
 from goods.models import Goods
+
 User = get_user_model()
+
+
 # Create your models here.
 
 
@@ -46,12 +49,9 @@ class OrderInfo(models.Model):
     post_script = models.CharField(max_length=200, verbose_name="订单留言")
     order_mount = models.FloatField(default=0.0, verbose_name="订单金额")
     pay_time = models.DateTimeField(null=True, blank=True, verbose_name="支付时间")
-
-    # 用户信息
     address = models.CharField(max_length=100, default="", verbose_name="收货地址")
     signer_name = models.CharField(max_length=20, default="", verbose_name="签收人")
     singer_mobile = models.CharField(max_length=11, verbose_name="联系电话")
-
     add_time = models.DateTimeField(default=datetime.now, verbose_name="添加时间")
 
     class Meta:
@@ -61,6 +61,7 @@ class OrderInfo(models.Model):
     def __str__(self):
         return str(self.order_sn)
 
+
 class OrderGoods(models.Model):
     """
     订单的商品详情
@@ -68,7 +69,6 @@ class OrderGoods(models.Model):
     order = models.ForeignKey(OrderInfo, verbose_name="订单信息", related_name="goods")
     goods = models.ForeignKey(Goods, verbose_name="商品")
     goods_num = models.IntegerField(default=0, verbose_name="商品数量")
-
     add_time = models.DateTimeField(default=datetime.now, verbose_name="添加时间")
 
     class Meta:

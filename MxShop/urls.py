@@ -23,21 +23,22 @@ from rest_framework_jwt.views import obtain_jwt_token
 import xadmin
 from MxShop.settings import MEDIA_ROOT
 from goods.views import GoodsListViewSet, CategoryViewSet
-from users.views import SmsCodeViewset,UserViewSet
-from user_operation.views import UserFavViewSet
+from trade.views import ShopCartViewSet
+from user_operation.views import UserFavViewSet, LeavingMessageViewSet, UserAddressViewSet
+from users.views import SmsCodeViewset, UserViewSet
 
 # from django.contrib import admin
 
 route = DefaultRouter()
-route.register(r'goods', GoodsListViewSet,base_name='goods')
+route.register(r'goods', GoodsListViewSet, base_name='goods')
 route.register(r'categorys', CategoryViewSet, base_name="categorys")
 route.register(r'codes', SmsCodeViewset, base_name="codes")
 route.register(r'users', UserViewSet, base_name="users")
 route.register(r'userfavs', UserFavViewSet, base_name="userfavs")
+route.register(r'messages', LeavingMessageViewSet, base_name="messages")
+route.register(r'address', UserAddressViewSet, base_name="address")
+route.register(r'shopcarts', ShopCartViewSet, base_name="shopcarts")
 
-# goods_list = GoodsListViewSet.as_view({
-#     'get': 'list',
-# })
 
 urlpatterns = [
     url(r'^', include(route.urls)),
